@@ -1,0 +1,11 @@
+{
+  "name": "cloudinary-cron",
+  "version": "1.0.0",
+  "repository": "git@github.com:colbyfayock/cloudinary-cron.git",
+  "author": "Colby Fayock <hello@colbyfayock.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cloudinary": "^1.33.0",
+    "dotenv": "^10.0.0"
+  }
+}
