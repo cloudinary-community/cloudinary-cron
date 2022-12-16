@@ -12,6 +12,11 @@ const CLOUD_CONFIGS = [
     api_key: process.env.SPACEJELLY_TUTORIALS_CLOUDINARY_API_KEY,
     api_secret: process.env.SPACEJELLY_TUTORIALS_CLOUDINARY_API_SECRET
   },
+  {
+    cloud_name: process.env.COLBYCLOUD_MEDIA_JAMS_CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.COLBYCLOUD_MEDIA_JAMS_CLOUDINARY_API_KEY,
+    api_secret: process.env.COLBYCLOUD_MEDIA_JAMS_CLOUDINARY_API_SECRET
+  },
 ];
 
 (async function run() {
