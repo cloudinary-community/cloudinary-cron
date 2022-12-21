@@ -15,7 +15,10 @@ const CLOUD_CONFIGS = [
   {
     cloud_name: process.env.COLBYCLOUD_MEDIA_JAMS_CLOUDINARY_CLOUD_NAME,
     api_key: process.env.COLBYCLOUD_MEDIA_JAMS_CLOUDINARY_API_KEY,
-    api_secret: process.env.COLBYCLOUD_MEDIA_JAMS_CLOUDINARY_API_SECRET
+    api_secret: process.env.COLBYCLOUD_MEDIA_JAMS_CLOUDINARY_API_SECRET,
+    directoriesToClear: [
+      'mediajams/qr/'
+    ]
   },
 ];
 
@@ -23,8 +26,15 @@ const CLOUD_CONFIGS = [
   for ( let i = 0, configsLength = CLOUD_CONFIGS.length; i < configsLength; i++ ) {
     const config = CLOUD_CONFIGS[i];
     console.log(`---- Begin ${config.cloud_name} ----`);
+
     cloudinary.config(config);
+
     await deleteModerations();
+
+    if ( Array.isArray(config.directoriesToClear) ) {
+      await clearDirectoriesByPrefixes(config.directoriesToClear);
+    }
+
     console.log(`---- End ${config.cloud_name} ----`);
   }
 })();
@@ -53,5 +63,29 @@ async function deleteModerations() {
     }
   } catch(e) {
     console.log(`Failed to delete all moderations: ${e.message}`);
+  }
+}
+
+/**
+ * clearDirectoriesByPrefix
+ */
+
+async function clearDirectoriesByPrefixes(prefixes = []) {
+  const prefixesLength = prefixes.length;
+
+  if ( prefixesLength === 0 ) {
+    console.log('No directories to clear...');
+    return;
+  }
+
+  console.log(`Clearing ${prefixesLength} directories...`);
+
+  try {
+    for ( let i = 0; i < prefixesLength; i++ ) {
+      const prefix = prefixes[i];
+      await cloudinary.api.delete_resources_by_prefix(prefix);
+    }
+  } catch(e) {
+    console.log(`Failed to clear all directories: ${e.message}`);
   }
 }
