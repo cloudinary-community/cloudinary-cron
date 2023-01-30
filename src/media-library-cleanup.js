@@ -3,6 +3,19 @@ const cloudinary = require('cloudinary').v2;
 
 const CLOUD_CONFIGS = [
   {
+    cloud_name: process.env.COLBYCLOUD_MEDIA_JAMS_CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.COLBYCLOUD_MEDIA_JAMS_CLOUDINARY_API_KEY,
+    api_secret: process.env.COLBYCLOUD_MEDIA_JAMS_CLOUDINARY_API_SECRET,
+    directoriesToClear: [
+      'mediajams/qr/'
+    ]
+  },
+  {
+    cloud_name: process.env.COLBYCLOUD_EXAMPLES_CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.COLBYCLOUD_EXAMPLES_CLOUDINARY_API_KEY,
+    api_secret: process.env.COLBYCLOUD_EXAMPLES_CLOUDINARY_API_SECRET
+  },
+  {
     cloud_name: process.env.NEXT_CLOUDINARY_CLOUDINARY_CLOUD_NAME,
     api_key: process.env.NEXT_CLOUDINARY_CLOUDINARY_API_KEY,
     api_secret: process.env.NEXT_CLOUDINARY_CLOUDINARY_API_SECRET
@@ -12,14 +25,7 @@ const CLOUD_CONFIGS = [
     api_key: process.env.SPACEJELLY_TUTORIALS_CLOUDINARY_API_KEY,
     api_secret: process.env.SPACEJELLY_TUTORIALS_CLOUDINARY_API_SECRET
   },
-  {
-    cloud_name: process.env.COLBYCLOUD_MEDIA_JAMS_CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.COLBYCLOUD_MEDIA_JAMS_CLOUDINARY_API_KEY,
-    api_secret: process.env.COLBYCLOUD_MEDIA_JAMS_CLOUDINARY_API_SECRET,
-    directoriesToClear: [
-      'mediajams/qr/'
-    ]
-  },
+
 ];
 
 (async function run() {
