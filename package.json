@@ -5,7 +5,7 @@
   "author": "Colby Fayock <hello@colbyfayock.com>",
   "license": "MIT",
   "dependencies": {
-    "cloudinary": "^1.33.0",
-    "dotenv": "^10.0.0"
+    "cloudinary": "^2.4.0",
+    "dotenv": "^16.4.5"
   }
 }
