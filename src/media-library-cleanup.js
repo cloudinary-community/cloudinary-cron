@@ -28,11 +28,6 @@ const CLOUD_CONFIGS = [
     api_secret: process.env.NUXT_CLOUDINARY_CLOUDINARY_API_SECRET
   },
   {
-    cloud_name: process.env.SPACEJELLY_TUTORIALS_CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.SPACEJELLY_TUTORIALS_CLOUDINARY_API_KEY,
-    api_secret: process.env.SPACEJELLY_TUTORIALS_CLOUDINARY_API_SECRET
-  },
-  {
     cloud_name: process.env.SVELTE_CLOUDINARY_CLOUDINARY_CLOUD_NAME,
     api_key: process.env.SVELTE_CLOUDINARY_CLOUDINARY_API_KEY,
     api_secret: process.env.SVELTE_CLOUDINARY_CLOUDINARY_API_SECRET
@@ -47,7 +42,10 @@ const CLOUD_CONFIGS = [
     cloudinary.config(config);
 
     const moderations = await getAllModerations();
-    await deleteModerations(moderations);
+
+    if ( Array.isArray(moderations) ) {
+      await deleteModerations(moderations);
+    }
 
     if ( Array.isArray(config.directoriesToClear) ) {
       await clearDirectoriesByPrefixes(config.directoriesToClear);
@@ -74,7 +72,7 @@ async function getAllModerations() {
 
     return moderations.flat();
   } catch(e) {
-    console.log(`Failed to get all moderations: ${e.message}`);
+    console.log(`Failed to get all moderations: ${e.message || e.error?.message}`);
   }
 }
 
